@@ -19,7 +19,7 @@ Base = declarative_base()
 class Challenge(Base):
     __tablename__ = 'challenge'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(String, primary_key=True)
     difficulty = Column(String, nullable=False)
     date_created = Column(DateTime, default=datetime.now())
     created_by = Column(String, nullable=False)
@@ -32,7 +32,7 @@ class ChallengeQuota(Base):
     __tablename__ = 'challenge_quota'
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, nullable=False, unique=True)
+    user_id = Column(String, nullable=False, unique=True)
     quota_remaining = Column(Integer, nullable=False, default=50)
     last_reset_date = Column(DateTime, default=datetime.now())
 
