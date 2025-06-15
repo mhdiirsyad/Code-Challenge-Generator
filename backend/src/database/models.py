@@ -19,7 +19,7 @@ Base = declarative_base()
 class Challenge(Base):
     __tablename__ = 'challenge'
 
-    id = Column(String, primary_key=True)
+    id = Column(Integer, primary_key=True)
     difficulty = Column(String, nullable=False)
     date_created = Column(DateTime, default=datetime.now())
     created_by = Column(String, nullable=False)
