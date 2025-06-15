@@ -5,6 +5,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
 DB_URL = os.getenv("DATABASE_URL", "sqlite:///database.db")
 if DB_URL.startswith("sqlite"):
     engine = create_engine(
