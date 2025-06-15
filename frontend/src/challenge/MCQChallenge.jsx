@@ -1,10 +1,12 @@
 import React from "react";
-import { useState } from "react";
 
-export function MCQChallenge({challenge, showExplanation=false}) {
-    const [selectedOption, setSelectedOption] = useState(null)
-    const [isShowExplanation, setIsShowExplanation] = useState(showExplanation)
-
+export function MCQChallenge({
+        challenge,
+        selectedOption, 
+        setSelectedOption,
+        isShowExplanation,
+        setIsShowExplanation,
+    }) {
     const options = typeof challenge.options === "string"
         ? JSON.parse(challenge.options)
         : challenge.options 
@@ -16,7 +18,7 @@ export function MCQChallenge({challenge, showExplanation=false}) {
     }
 
     const getOptionClass = (index) => {
-        if(selectedOption === null) "option";
+        if(selectedOption === null) return "option";
 
         if(selectedOption===index && index === challenge.correct_answer_id) {
             return "option correct"

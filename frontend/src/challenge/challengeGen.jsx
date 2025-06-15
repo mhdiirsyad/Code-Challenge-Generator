@@ -12,14 +12,21 @@ export function ChallengeGen() {
     const [quota, setQuota] = useState(null);
     const { MakeRequest } = useApi();
     const { isSignedIn, isLoaded } = useAuth()
+    const [selectedOption, setSelectedOption] = useState(null)
+    const [isShowExplanation, setIsShowExplanation] = useState(false)
 
     const fetchQuota = useCallback(async () => {
+        setLoading(true)
         try {
             const data = await MakeRequest("quota")
+            setSelectedOption(null)
+            setIsShowExplanation(false)
             setQuota(data)
         }catch(err){
             console.error("Error fetching quota:", err)
             setError(err.message)
+        }finally{
+            setLoading(false)
         }
     }, [MakeRequest])
 
@@ -90,6 +97,14 @@ export function ChallengeGen() {
             <p>{error}</p>
         </div>}
 
-        {challenge && <MCQChallenge challenge={challenge} />}
+        {challenge && (
+            <MCQChallenge 
+            challenge={challenge} 
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            isShowExplanation={isShowExplanation}
+            setIsShowExplanation={setIsShowExplanation}
+            />
+        )}
     </div>
 }
