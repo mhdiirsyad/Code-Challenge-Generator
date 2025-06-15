@@ -2,8 +2,17 @@ from sqlalchemy import Column, Integer, String, DateTime, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
-engine = create_engine('sqlite:///database.db', echo=True)
+DB_URL = os.getenv("DATABASE_URL", "sqlite:///database.db")
+if DB_URL.startswith("sqlite"):
+    engine = create_engine(
+        DB_URL, connect_args={"check_same_thread": False}
+    )
+else:
+    engine = create_engine(DB_URL)
+
 Base = declarative_base()
 
 class Challenge(Base):
