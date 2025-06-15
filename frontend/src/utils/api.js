@@ -12,8 +12,8 @@ export const useApi = () => {
                 "Authorization": `Bearer ${token}`
             }
         }
-
-        const response = await fetch(`http://localhost:8000/api/${endpoint}`, {
+        const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+        const response = await fetch(`${baseUrl}/api/${endpoint}`, {
             ...defaultOptions,
             ...options
         })
