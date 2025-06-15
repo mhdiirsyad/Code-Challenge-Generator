@@ -11,7 +11,7 @@ def authenticate_get_user_details(request):
         request_state = clerk_sdk.authenticate_request(
             request,
             AuthenticateRequestOptions(
-                authorized_parties=["http://localhost:5173"],
+                authorized_parties=["http://localhost:5173", "https://code-challenge-generator.vercel.app"],
                 jwt_key=os.getenv("JWT_KEY")
             )
         )
